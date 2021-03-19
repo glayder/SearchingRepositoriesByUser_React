@@ -106,8 +106,6 @@ function Main() {
     setOpen(false);
   }
 
-  console.log(repositories);
-
   if (loading) {
     return <h1>Loading</h1>;
   }
@@ -115,7 +113,7 @@ function Main() {
     <Container maxWidth="sm">
       <Form setNameToFind={setNameToFind} getDataUser={getDataUser} />
       <br />
-      {user.name && (
+      {user.public_repos && (
         <div>
           <p>Name: ${user.name}</p>
           <p>Public Reposositories: {user.public_repos}</p>
