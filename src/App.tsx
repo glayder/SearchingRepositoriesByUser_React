@@ -1,11 +1,13 @@
 import React from 'react';
 
+import Main from './page/main';
+
 import './assets/images/global.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>CooperSystem</h1>
+      <Main />
     </div>
   );
 }
