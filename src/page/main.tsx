@@ -63,11 +63,6 @@ function Main() {
 
   const classes = useStyles();
 
-  function getDataUser() {
-    findUser();
-    findRepositories();
-  }
-
   async function findUser() {
     const userInfo = await fetch(`https://api.github.com/users/${nameToFind}`);
     const data = await userInfo.json();
@@ -103,12 +98,18 @@ function Main() {
     setOpen(false);
   }
 
+  function handleSubmit(event: React.FormEvent<HTMLInputElement>) {
+    event.preventDefault();
+    findUser();
+    findRepositories();
+  }
+
   if (loading) {
     return <h1>Loading</h1>;
   }
   return (
     <Container maxWidth="sm">
-      <Form setNameToFind={setNameToFind} getDataUser={getDataUser} />
+      <Form setNameToFind={setNameToFind} handleSubmit={handleSubmit} />
       <br />
       {user.public_repos && (
         <div>

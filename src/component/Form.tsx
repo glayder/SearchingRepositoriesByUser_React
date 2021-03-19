@@ -6,25 +6,23 @@ import SearchIcon from '@material-ui/icons/Search';
 
 interface Props {
   setNameToFind: any;
-  getDataUser: any;
+  handleSubmit: any;
 }
 
 function Form(props: Props) {
   return (
-    <form noValidate autoComplete="off">
+    <form onSubmit={props.handleSubmit} noValidate autoComplete="off">
       <TextField
         onChange={e => props.setNameToFind(e.target.value)}
         label="Name user"
       />
       <Button
+        type="submit"
         endIcon={<SearchIcon />}
-        onClick={() => {
-          props.getDataUser();
-        }}
-        variant="contained"
         color="primary"
+        variant="contained"
       >
-        Primary
+        Submit
       </Button>
     </form>
   );
