@@ -71,7 +71,6 @@ function Main() {
   async function findUser() {
     const userInfo = await fetch(`https://api.github.com/users/${nameToFind}`);
     const data = await userInfo.json();
-    console.log('data', data);
     setUser({
       public_repos: data.public_repos,
       followers: data.followers,
@@ -95,11 +94,9 @@ function Main() {
   }
 
   function showDescription(id: number) {
-    console.log('clicado');
     const description = repositories.filter(i => i.id === id);
     setRepoSelected(description[0]);
     setOpen(true);
-    console.log(description);
   }
 
   function handleClose() {
