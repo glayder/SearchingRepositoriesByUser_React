@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Container } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 import Form from '../component/Form';
 import ModalRepo from '../component/ModalRepo';
@@ -30,9 +32,13 @@ interface User {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: '100%',
-      maxWidth: 360,
+      flexGrow: 1,
       backgroundColor: theme.palette.background.paper,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
     },
   }),
 );
@@ -114,13 +120,27 @@ function Main() {
       {user.public_repos && (
         <div>
           <p>Name: ${user.name}</p>
-          <p>Public Reposositories: {user.public_repos}</p>
-          <p>Followers: {user.followers}</p>
-          <p>Following: {user.following}</p>
           <p>Blog: {user.blog}</p>
           <p>Bio: {user.bio}</p>
           <p>Twitter: {user.twitter_username}</p>
           <p>Company: {user.company}</p>
+          <Grid container spacing={3}>
+            <Grid item xs={4}>
+              <Paper className={classes.paper}>
+                Followers: {user.followers}
+              </Paper>
+            </Grid>
+            <Grid item xs={4}>
+              <Paper className={classes.paper}>
+                Public Reposositories: {user.public_repos}
+              </Paper>
+            </Grid>
+            <Grid item xs={4}>
+              <Paper className={classes.paper}>
+                Following: {user.following}
+              </Paper>
+            </Grid>
+          </Grid>
         </div>
       )}
       <br />
