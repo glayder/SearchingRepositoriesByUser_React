@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import { Container } from '@material-ui/core';
+import List from '@material-ui/core/List';
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 
 import Form from '../component/Form';
 import ModalRepo from '../component/ModalRepo';
@@ -25,6 +27,16 @@ interface User {
   company: string;
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: '100%',
+      maxWidth: 360,
+      backgroundColor: theme.palette.background.paper,
+    },
+  }),
+);
+
 function Main() {
   const [user, setUser] = useState<User>({
     public_repos: '',
@@ -48,6 +60,8 @@ function Main() {
     description: '',
     language: '',
   });
+
+  const classes = useStyles();
 
   function getDataUser() {
     findUser();
@@ -92,6 +106,8 @@ function Main() {
     setOpen(false);
   }
 
+  console.log(repositories);
+
   if (loading) {
     return <h1>Loading</h1>;
   }
@@ -112,16 +128,19 @@ function Main() {
         </div>
       )}
       <br />
-      {repositories &&
-        repositories.map((i: any) => (
-          <div key={i.id}>
-            <ListDescription
-              id={i.id}
-              full_name={i.full_name}
-              showDescription={showDescription}
-            />
-          </div>
-        ))}
+      {!!repositories.length && (
+        <List className={classes.root} aria-label="mailbox folders">
+          {repositories.map((i: any) => (
+            <div key={i.id}>
+              <ListDescription
+                id={i.id}
+                full_name={i.full_name}
+                showDescription={showDescription}
+              />
+            </div>
+          ))}
+        </List>
+      )}
 
       <ModalRepo
         open={open}
