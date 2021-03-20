@@ -9,6 +9,9 @@ import Grid from '@material-ui/core/Grid';
 import Form from '../component/Form';
 import ModalRepo from '../component/ModalRepo';
 import ListDescription from '../component/ListDescription';
+import Loading from '../component/Loading';
+
+interface Repositories {
 
 interface Repositories {
   id: number;
@@ -111,7 +114,7 @@ function Main() {
   }
 
   if (loading) {
-    return <h1>Loading</h1>;
+    return <Loading />;
   }
   return (
     <Container maxWidth="sm">
