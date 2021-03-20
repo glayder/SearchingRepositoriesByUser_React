@@ -3,15 +3,13 @@ import React, { useState } from 'react';
 import { Container } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 
 import Form from '../component/Form';
 import ModalRepo from '../component/ModalRepo';
 import ListDescription from '../component/ListDescription';
+import UserInfo from '../component/UserInfo';
 import Loading from '../component/Loading';
-
-interface Repositories {
+import Cards from '../component/Cards';
 
 interface Repositories {
   id: number;
@@ -30,6 +28,8 @@ interface User {
   bio: string;
   twitter_username: string;
   company: string;
+  public_gists: string;
+  avatar_url: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,15 +37,19 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flexGrow: 1,
       backgroundColor: theme.palette.background.paper,
+      borderRadius: 5,
+      boxShadow: '1px 1px 2px #00000061',
     },
     paper: {
       padding: theme.spacing(2),
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
+    container: {
+      padding: 24,
+    },
   }),
 );
-
 function Main() {
   const [user, setUser] = useState<User>({
     public_repos: '',
@@ -56,8 +60,9 @@ function Main() {
     bio: '',
     twitter_username: '',
     company: '',
+    public_gists: '',
+    avatar_url: '',
   });
-
   const [nameToFind, setNameToFind] = useState('');
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -82,8 +87,10 @@ function Main() {
       blog: data.blog,
       name: data.name,
       bio: data.bio,
+      public_gists: data.public_gists,
       twitter_username: data.twitter_username,
       company: data.company,
+      avatar_url: data.avatar_url,
     });
   }
 
@@ -117,36 +124,19 @@ function Main() {
     return <Loading />;
   }
   return (
-    <Container maxWidth="sm">
+    <Container className={classes.container}>
       <Form setNameToFind={setNameToFind} handleSubmit={handleSubmit} />
-      <br />
       {user.public_repos && (
         <div>
-          <p>Name: ${user.name}</p>
-          <p>Blog: {user.blog}</p>
-          <p>Bio: {user.bio}</p>
-          <p>Twitter: {user.twitter_username}</p>
-          <p>Company: {user.company}</p>
-          <Grid container spacing={3}>
-            <Grid item xs={4}>
-              <Paper className={classes.paper}>
-                Followers: {user.followers}
-              </Paper>
-            </Grid>
-            <Grid item xs={4}>
-              <Paper className={classes.paper}>
-                Public Reposositories: {user.public_repos}
-              </Paper>
-            </Grid>
-            <Grid item xs={4}>
-              <Paper className={classes.paper}>
-                Following: {user.following}
-              </Paper>
-            </Grid>
-          </Grid>
+          <UserInfo user={user} />
+          <Cards
+            followers={user.followers}
+            public_repos={user.public_repos}
+            following={user.following}
+            public_gists={user.public_gists}
+          />
         </div>
       )}
-      <br />
       {!!repositories.length && (
         <List className={classes.root} aria-label="mailbox folders">
           {repositories.map((i: any) => (
