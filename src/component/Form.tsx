@@ -4,6 +4,8 @@ import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 
+import './form.css';
+
 interface Props {
   setNameToFind: any;
   handleSubmit: any;
@@ -21,6 +23,7 @@ function Form(props: Props) {
         endIcon={<SearchIcon />}
         color="primary"
         variant="contained"
+        className="btnSubmit"
       >
         Submit
       </Button>

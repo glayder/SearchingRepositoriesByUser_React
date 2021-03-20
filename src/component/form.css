@@ -1,0 +1,20 @@
+form {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  margin-bottom: 30px;
+}
+
+form > .btnSubmit {
+  color: #101010;
+  background: transparent;
+  border: 1px solid #868686;
+  margin-left: 10px;
+  box-shadow: none;
+  padding: 6px;
+  font-size: 0.8rem;
+}
+
+form .btnSubmit:hover {
+  background: #d8d8e2
+}
