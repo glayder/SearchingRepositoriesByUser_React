@@ -28,12 +28,18 @@ function ModalRepo(props: Props) {
       className="modal"
     >
       <div className="content">
-        <h1>Details Repository</h1>
-        <p>Repository Full Name: {props.repoSelected.full_name}</p>
-        <p>Description: {props.repoSelected.description}</p>
-        <p>Language: {props.repoSelected.language}</p>
+        <h1 className="title">Details Repository</h1>
         <p>
-          Date created:
+          <span>Repository Full Name:</span> {props.repoSelected.full_name}
+        </p>
+        <p>
+          <span>Description:</span> {props.repoSelected.description}
+        </p>
+        <p>
+          <span>Language:</span> {props.repoSelected.language}
+        </p>
+        <p>
+          <span>Date created: </span>
           {moment(props.repoSelected.created_at).format('DD/MM/YYYY')}
         </p>
       </div>
