@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
-import { Container } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import { Container, List } from '@material-ui/core';
 
 import Form from '../component/Form';
-import ModalRepo from '../component/ModalRepo';
+import ModalRepo from '../component/Modal';
 import ListDescription from '../component/ListDescription';
 import UserInfo from '../component/UserInfo';
 import Loading from '../component/Loading';
 import Cards from '../component/Cards';
+
+import useStyles from './style';
 
 interface Repositories {
   id: number;
@@ -32,24 +32,6 @@ interface User {
   avatar_url: string;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-      backgroundColor: theme.palette.background.paper,
-      borderRadius: 5,
-      boxShadow: '1px 1px 2px #00000061',
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-    container: {
-      padding: 24,
-    },
-  }),
-);
 function Main() {
   const [user, setUser] = useState<User>({
     public_repos: '',

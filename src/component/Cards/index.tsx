@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import { Code, PersonAdd, PeopleAlt, Book } from '@material-ui/icons';
 import Grid from '@material-ui/core/Grid';
 
 import CardItem from './CardItem';
 
-import './card.css';
+import useStyles from './style';
 
 interface Props {
   followers: string;
@@ -14,21 +13,6 @@ interface Props {
   following: string;
   public_gists: string;
 }
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    card: {
-      marginTop: 20,
-      marginBottom: 20,
-      fontSize: '0.8rem',
-      padding: 0,
-      justifyContent: 'center',
-    },
-    icon: {
-      marginRight: 10,
-    },
-  }),
-);
 
 function Cards(props: Props) {
   const classes = useStyles();

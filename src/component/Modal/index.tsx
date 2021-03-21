@@ -3,11 +3,13 @@ import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import moment from 'moment';
 
-import './modalRepo.css';
+import useStyles from './style';
 
 interface Props {
+  // eslint-disable-next-line
   open: any;
   repoSelected: RepoSelected;
+  // eslint-disable-next-line
   handleClose: any;
 }
 
@@ -19,16 +21,17 @@ interface RepoSelected {
 }
 
 function ModalRepo(props: Props) {
+  const classes = useStyles();
   return (
     <Modal
       open={props.open}
       onClose={props.handleClose}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
-      className="modal"
+      className={classes.modal}
     >
-      <div className="content">
-        <h1 className="title">Details Repository</h1>
+      <div className={classes.content}>
+        <h1 className={classes.title}>Details Repository</h1>
         <p>
           <span>Repository Full Name:</span> {props.repoSelected.full_name}
         </p>

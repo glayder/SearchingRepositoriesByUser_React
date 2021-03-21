@@ -1,20 +1,31 @@
 import React from 'react';
 
-import { Button } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import { Button, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
-import './form.css';
+import useStyles from './style';
 
 interface Props {
+  // eslint-disable-next-line
   setNameToFind: any;
+  // eslint-disable-next-line
   handleSubmit: any;
 }
 
 function Form(props: Props) {
+  const classes = useStyles();
   return (
-    <form onSubmit={props.handleSubmit} noValidate autoComplete="off">
+    <form
+      data-testid="find-user-form"
+      onSubmit={props.handleSubmit}
+      noValidate
+      autoComplete="off"
+      className={classes.form}
+    >
       <TextField
+        inputProps={{
+          'data-testid': 'find-user-input',
+        }}
         onChange={e => props.setNameToFind(e.target.value)}
         label="Name user"
       />
@@ -23,7 +34,7 @@ function Form(props: Props) {
         endIcon={<SearchIcon />}
         color="primary"
         variant="contained"
-        className="btnSubmit"
+        className={classes.btnSubmit}
       >
         Submit
       </Button>

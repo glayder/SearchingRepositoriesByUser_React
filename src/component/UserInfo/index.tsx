@@ -1,12 +1,9 @@
 import React from 'react';
 
-import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { Avatar, Grid, Paper, Typography, Link } from '@material-ui/core';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import Link from '@material-ui/core/Link';
+
+import useStyles from './style';
 
 interface Props {
   user: User;
@@ -22,41 +19,6 @@ interface User {
   followers: string;
   public_repos: string;
 }
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: 'auto',
-    maxWidth: 500,
-  },
-  image: {
-    width: 128,
-    height: 128,
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-  },
-  avatar: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  gridContainer: {
-    [theme.breakpoints.down(600)]: {
-      justifyContent: 'center',
-    },
-  },
-  gridDescription: {
-    [theme.breakpoints.down(600)]: {
-      textAlign: 'center',
-    },
-  },
-}));
 
 function UserInfo(props: Props) {
   const classes = useStyles();
