@@ -13,7 +13,7 @@ interface Props {
 function CardItem(props: Props) {
   const classes = useStyles();
   return (
-    <Grid item xs={3} className={classes.cardItem}>
+    <Grid data-testid="grid-item" item xs={3} className={classes.cardItem}>
       <Paper className={classes.paper}>{props.children}</Paper>
     </Grid>
   );

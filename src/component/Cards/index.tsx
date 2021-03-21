@@ -17,7 +17,12 @@ interface Props {
 function Cards(props: Props) {
   const classes = useStyles();
   return (
-    <Grid container className={classes.card} spacing={3}>
+    <Grid
+      data-testid="grid-container"
+      container
+      className={classes.card}
+      spacing={3}
+    >
       <CardItem>
         <PeopleAlt className={classes.icon} />
         Followers: <span>{props.followers}</span>
