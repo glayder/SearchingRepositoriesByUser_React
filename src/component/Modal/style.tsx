@@ -19,6 +19,15 @@ const useStyles = makeStyles((theme: Theme) =>
       '&:focus': {
         outline: 'none',
       },
+      '& p': {
+        color: ' rgb(102, 101, 101)',
+        fontWeight: 400,
+        marginTop: 8,
+      },
+      '& span': {
+        color: 'rgb(56, 56, 56)',
+        fontWeight: 'bold',
+      },
     },
     title: {
       borderBottom: '1px solid rgb(56, 56, 56)',
@@ -26,15 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom: 5,
       textAlign: 'center',
       marginBottom: 20,
-    },
-    p: {
-      color: ' rgb(102, 101, 101)',
-      fontWeight: 400,
-      marginTop: 8,
-    },
-    span: {
-      color: 'rgb(56, 56, 56)',
-      fontWeight: 'bold',
     },
   }),
 );
