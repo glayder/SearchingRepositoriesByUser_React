@@ -49,6 +49,7 @@ function Main() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [repositories, setRepositories] = useState<Repositories[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [repoSelected, setRepoSelected] = useState<Repositories[] | any>({
     id: 0,
     full_name: '',
@@ -121,6 +122,7 @@ function Main() {
       )}
       {!!repositories.length && (
         <List className={classes.root} aria-label="mailbox folders">
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {repositories.map((i: any) => (
             <div key={i.id}>
               <ListDescription
