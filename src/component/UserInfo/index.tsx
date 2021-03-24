@@ -1,27 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
+import { User } from '../../store';
 
 import { Avatar, Grid, Paper, Typography, Link } from '@material-ui/core';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
 import useStyles from './style';
 
-interface Props {
-  user: User;
-}
-
-interface User {
-  blog: string;
-  name: string;
-  bio: string;
-  twitter_username: string;
-  company: string;
-  avatar_url: string;
-  followers: string;
-  public_repos: string;
-}
-
-function UserInfo(props: Props) {
+function UserInfo() {
   const classes = useStyles();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const user: User = useSelector((state: any) => state.user);
   return (
     <Paper className={classes.paper}>
       <Grid container spacing={2} className={classes.gridContainer}>
@@ -29,27 +19,27 @@ function UserInfo(props: Props) {
           <Avatar
             alt="Remy Sharp"
             className={classes.image}
-            src={props.user.avatar_url}
+            src={user.avatar_url}
           />
         </Grid>
         <Grid item xs={12} sm container>
           <Grid item xs container direction="column" spacing={2}>
             <Grid item xs className={classes.gridDescription}>
               <Typography gutterBottom variant="subtitle1">
-                {props.user.name}
+                {user.name}
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                {props.user.company}
+                {user.company}
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                {props.user.bio}
+                {user.bio}
               </Typography>
               <Typography variant="body2" gutterBottom>
-                {props.user.blog}
+                {user.blog}
               </Typography>
-              {props.user.twitter_username && (
+              {user.twitter_username && (
                 <Link
-                  href={`https://twitter.com/${props.user.twitter_username}`}
+                  href={`https://twitter.com/${user.twitter_username}`}
                   target="_blank"
                 >
                   <TwitterIcon />

@@ -1,4 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
+import { User } from '../../store';
 
 import { Code, PersonAdd, PeopleAlt, Book } from '@material-ui/icons';
 import Grid from '@material-ui/core/Grid';
@@ -7,15 +10,10 @@ import CardItem from './CardItem';
 
 import useStyles from './style';
 
-interface Props {
-  followers: string;
-  public_repos: string;
-  following: string;
-  public_gists: string;
-}
-
-function Cards(props: Props) {
+function Cards() {
   const classes = useStyles();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const user: User = useSelector((state: any) => state.user);
   return (
     <Grid
       data-testid="grid-container"
@@ -25,19 +23,19 @@ function Cards(props: Props) {
     >
       <CardItem>
         <PeopleAlt className={classes.icon} />
-        Followers: <span>{props.followers}</span>
+        Followers: <span>{user.followers}</span>
       </CardItem>
       <CardItem>
         <Book className={classes.icon} />
-        Public Reposositories: <span>{props.public_repos}</span>
+        Public Reposositories: <span>{user.public_repos}</span>
       </CardItem>
       <CardItem>
         <PersonAdd className={classes.icon} />
-        Following: <span>{props.following}</span>
+        Following: <span>{user.following}</span>
       </CardItem>
       <CardItem>
         <Code className={classes.icon} />
-        Gists: <span>{props.public_gists}</span>
+        Gists: <span>{user.public_gists}</span>
       </CardItem>
     </Grid>
   );

@@ -6,9 +6,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './style';
 
 interface Props {
-  // eslint-disable-next-line
-  setNameToFind: any;
-  // eslint-disable-next-line
+  setNameToFind(e: string): void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleSubmit: any;
 }
 

@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { User, Repositories } from '../store/index';
 
 import { Container, List } from '@material-ui/core';
 
@@ -11,44 +14,10 @@ import Cards from '../component/Cards';
 
 import useStyles from './style';
 
-interface Repositories {
-  id: number;
-  full_name: string;
-  created_at: string;
-  description: string;
-  language: string;
-}
-
-interface User {
-  public_repos: string;
-  followers: string;
-  following: string;
-  blog: string;
-  name: string;
-  bio: string;
-  twitter_username: string;
-  company: string;
-  public_gists: string;
-  avatar_url: string;
-}
-
 function Main() {
-  const [user, setUser] = useState<User>({
-    public_repos: '',
-    followers: '',
-    following: '',
-    blog: '',
-    name: '',
-    bio: '',
-    twitter_username: '',
-    company: '',
-    public_gists: '',
-    avatar_url: '',
-  });
   const [nameToFind, setNameToFind] = useState('');
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [repositories, setRepositories] = useState<Repositories[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [repoSelected, setRepoSelected] = useState<Repositories[] | any>({
     id: 0,
@@ -59,22 +28,20 @@ function Main() {
   });
 
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const repositories: Repositories[] = useSelector(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (state: any) => state.repository,
+  );
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const user: User = useSelector((state: any) => state.user);
 
   async function findUser() {
     const userInfo = await fetch(`https://api.github.com/users/${nameToFind}`);
     const data = await userInfo.json();
-    setUser({
-      public_repos: data.public_repos,
-      followers: data.followers,
-      following: data.following,
-      blog: data.blog,
-      name: data.name,
-      bio: data.bio,
-      public_gists: data.public_gists,
-      twitter_username: data.twitter_username,
-      company: data.company,
-      avatar_url: data.avatar_url,
-    });
+    dispatch({ type: 'ADD_USER', user: data });
   }
 
   async function findRepositories() {
@@ -83,8 +50,9 @@ function Main() {
       `https://api.github.com/users/${nameToFind}/repos`,
     );
     const data = await repo.json();
-    setRepositories(data);
     setLoading(false);
+    // setRepositories(data);
+    dispatch({ type: 'ADD_REPOSITORY', repository: data });
   }
 
   function showDescription(id: number) {
@@ -110,15 +78,10 @@ function Main() {
     <Container className={classes.container}>
       <Form setNameToFind={setNameToFind} handleSubmit={handleSubmit} />
       {user.public_repos && (
-        <div>
-          <UserInfo user={user} />
-          <Cards
-            followers={user.followers}
-            public_repos={user.public_repos}
-            following={user.following}
-            public_gists={user.public_gists}
-          />
-        </div>
+        <>
+          <UserInfo />
+          <Cards />
+        </>
       )}
       {!!repositories.length && (
         <List className={classes.root} aria-label="mailbox folders">

@@ -6,8 +6,7 @@ import moment from 'moment';
 import useStyles from './style';
 
 interface Props {
-  // eslint-disable-next-line
-  open: any;
+  open: boolean;
   repoSelected: RepoSelected;
   // eslint-disable-next-line
   handleClose: any;
